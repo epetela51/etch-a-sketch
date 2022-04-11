@@ -1,1 +1,1 @@
-# etch-a-sketch
+This is a project where you will be able to do an etch-a-sketch in the browser
