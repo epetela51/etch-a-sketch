@@ -1,4 +1,6 @@
 let container = document.querySelector('#grid-container')
+//totalBoxes will show 0 at page load since there are no divs with class box in html on page load and they get added dynamically
+let totalBoxes = document.querySelectorAll('.box').length;
 
 function addBox() {
     let square = document.createElement('div')
@@ -7,17 +9,10 @@ function addBox() {
 }
 
 function addMultipleBoxes() {
-    //get total number of divs with class of 'box' on the page
-    let totalBoxes = document.querySelectorAll('.box').length;
-    console.log('Number of divs with the box class: ' + totalBoxes)
-
-    if(totalBoxes < 10) {
-        for(let i = 0; i < totalBoxes; i++) {
-            console.log(i)
-            addBox()
-        }
-    } else {
-        console.log('woops')
+    for(let i = 0; i < 256; i++) {
+        addBox()
+        totalBoxes++
+        console.log(totalBoxes)
     }
 }
 

@@ -7,6 +7,6 @@
 #grid-container {
     border: 2px solid red;
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(16, auto);
     justify-content: center;
 }
