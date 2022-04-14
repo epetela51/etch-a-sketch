@@ -1,19 +1,43 @@
 let container = document.querySelector('#grid-container')
-//totalBoxes will show 0 at page load since there are no divs with class box in html on page load and they get added dynamically
-let totalBoxes = document.querySelectorAll('.box').length;
+let resetBtn = document.querySelector('#reset')
 
-function addBox() {
+
+function box() {
     let square = document.createElement('div')
     square.setAttribute('class', 'box')
     container.appendChild(square)
 }
 
+// Sets up the etch-a-sketch grid by adding multiple boxes
 function addMultipleBoxes() {
     for(let i = 0; i < 256; i++) {
-        addBox()
-        totalBoxes++
-        console.log(totalBoxes)
+        box()
     }
 }
 
 addMultipleBoxes()
+
+// grabs all divs with the class of box
+let boxx = document.querySelectorAll('.box')
+
+// adds event listener for moving mouse over div and then adds css class
+function addBlackPen(e) {
+    e.addEventListener('mouseover', () => {
+        e.classList.add('blackPen')
+    })
+}
+
+// loops through each item in nodelist and adds the function to add css class
+boxx.forEach(addBlackPen)
+
+
+
+
+
+
+
+function resetSketch(e) {
+    
+}
+
+resetBtn.addEventListener('click', resetSketch)
