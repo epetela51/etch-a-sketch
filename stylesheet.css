@@ -4,7 +4,7 @@
     width: 20px;
 }
 
-/* adds the color to grid when mouse moves over */
+/* adds the color to the box as mouse moves over it */
 .blackPen {
     background-color: black;
 }
