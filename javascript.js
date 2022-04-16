@@ -42,6 +42,10 @@ resetBtn.addEventListener('click', () => {
     boxx.forEach((e) => {
         e.classList.remove('blackPen')
     })
+
+    // puts the starting point for the slider back to 16x16
+    slider.value = 16;
+    outputSliderValue.textContent = `${slider.value} x ${slider.value}`
 })
 
 
