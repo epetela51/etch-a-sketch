@@ -15,29 +15,25 @@ function addMultipleBoxes() {
     }
 }
 
+// on page load, run function to draw the grid
 addMultipleBoxes()
 
-// grabs all divs with the class of box
+// grabs all divs with the class of box and creates a nodeList
 let boxx = document.querySelectorAll('.box')
 
-// adds event listener for moving mouse over div and then adds css class
+// function for moving mouse over div and colors box using css class
 function addBlackPen(e) {
     e.addEventListener('mouseover', () => {
         e.classList.add('blackPen')
     })
 }
 
-// loops through each item in nodelist and adds the function to add css class
+// loops through each item in nodelist and adds the function
 boxx.forEach(addBlackPen)
 
-
-
-
-
-
-
-function resetSketch(e) {
-    
-}
-
-resetBtn.addEventListener('click', resetSketch)
+// clears board on reset button click by looping through nodeList
+resetBtn.addEventListener('click', () => {
+    boxx.forEach((e) => {
+        e.classList.remove('blackPen')
+    })
+})
