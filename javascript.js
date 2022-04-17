@@ -47,6 +47,9 @@ resetBtn.addEventListener('click', () => {
     // puts the starting point for the slider back to 16x16
     slider.value = 16;
     outputSliderValue.textContent = `${slider.value} x ${slider.value}`
+
+    // resets the grid size back to the default of 16x16
+    container.style.setProperty('grid-template-columns', `repeat(${slider.value}, auto)`)
 })
 
 
@@ -78,5 +81,6 @@ function newGrid() {
     let currentValue = slider.value
     console.log(currentValue)
 
-    container.style.gridTemplateColumns = repeat(currentValue, auto);
+    // changes the grid size based off the current value
+    container.style.setProperty('grid-template-columns', `repeat(${currentValue}, auto)`)
 }
