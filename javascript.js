@@ -70,6 +70,10 @@ resetBtn.addEventListener('click', () => {
 
     // resets the grid size back to the default of 16x16
     container.style.setProperty('grid-template-columns', `repeat(${sliderValue}, auto)`)
+
+    // re-grabs all the divs with class of box (clicking is btn will creating a new number of divs so need to re-grab)
+    let box = document.querySelectorAll('.box')
+    box.forEach(addBlackPen)
 })
 
 
@@ -102,4 +106,8 @@ function newGrid() {
 
     // re draws the grid to add correct number of boxes
     addMultipleBoxes(currentValue)
+
+    // re-grabs all the divs with class of box (clicking is btn will creating a new number of divs so need to re-grab)
+    let box = document.querySelectorAll('.box')
+    box.forEach(addBlackPen)
 }
