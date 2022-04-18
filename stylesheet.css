@@ -10,7 +10,6 @@
 }
 
 #grid-container {
-    border: 2px solid red;
     /* Below are part of the CSS Grid styling */
     display: grid;
     justify-content: center;

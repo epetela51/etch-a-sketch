@@ -1,25 +1,31 @@
+//////////////////////////////////////////////////////////////////////////////
+// Code to run on page load
+
 // div container holding all the child divs
 let container = document.querySelector('#grid-container')
 
 // input slider to change grid size
 let slider = document.querySelector('#sliderRange')
-let outputSliderValue = document.querySelector('#sliderValue')
+let outputGridSize = document.querySelector('#sliderValue')
 
 // display the starting value of the slider on page load for the grid size
-outputSliderValue.textContent = `${slider.value} x ${slider.value}`
+outputGridSize.textContent = `${slider.value} x ${slider.value}`
 
 
+
+//////////////////////////////////////////////////////////////////////////////
+// Code for a single box, creating multiple boxes and removing all boxes
+
+// on page load, run function to draw the grid
+addMultipleBoxes(slider.value)
+// add & set property for css grid columns
+container.style.setProperty('grid-template-columns', `repeat(${slider.value}, auto)`)
+
+// draws a single box
 function box() {
     let square = document.createElement('div')
     square.setAttribute('class', 'box')
     container.appendChild(square)
-}
-
-// removes all the boxes so the page is blank
-function removeBoxes() {
-    while(container.firstChild) {
-        container.removeChild(container.firstChild)
-    }
 }
 
 // Sets up the etch-a-sketch grid by adding multiple boxes
@@ -31,19 +37,20 @@ function addMultipleBoxes(value) {
     }
 }
 
-// on page load, run function to draw the grid
-addMultipleBoxes(slider.value)
-container.style.setProperty('grid-template-columns', `repeat(${slider.value}, auto)`)
+// removes all the boxes so the page is blank
+function removeBoxes() {
+    while(container.firstChild) {
+        container.removeChild(container.firstChild)
+    }
+}
+
 
 
 //////////////////////////////////////////////////////////////////////////////
 // Code for highlighting boxes with mouseover & resetting grid with button click
 
-// reset button
-let resetBtn = document.querySelector('#reset')
-
 // grabs all divs with the class of box and creates a nodeList
-let boxx = document.querySelectorAll('.box')
+let listOfBoxes = document.querySelectorAll('.box')
 
 // function for moving mouse over div and colors box using css class
 function addBlackPen(e) {
@@ -52,33 +59,37 @@ function addBlackPen(e) {
     })
 }
 
-// loops through each item in nodelist and adds the function
-boxx.forEach(addBlackPen)
+// loops through each item in nodelist and adds function to 'draw' a black pen on mouseover
+listOfBoxes.forEach(addBlackPen)
 
-// clears board on reset button click by looping through nodeList using forEach()
+// reset button
+let resetBtn = document.querySelector('#reset')
+
+// clears board on reset button click
 resetBtn.addEventListener('click', () => {
-    boxx.forEach((e) => {
+    listOfBoxes.forEach((e) => {
         e.classList.remove('blackPen')
     })
 
     // puts the starting point for the slider back to 16x16
     let sliderValue = slider.value = 16;
-    outputSliderValue.textContent = `${sliderValue} x ${sliderValue}`
+    outputGridSize.textContent = `${sliderValue} x ${sliderValue}`
+
+    // resets the css grid columns back to the default of 16x16
+    container.style.setProperty('grid-template-columns', `repeat(${sliderValue}, auto)`)
 
     removeBoxes()
     addMultipleBoxes(sliderValue)
 
-    // resets the grid size back to the default of 16x16
-    container.style.setProperty('grid-template-columns', `repeat(${sliderValue}, auto)`)
-
-    // re-grabs all the divs with class of box (clicking is btn will creating a new number of divs so need to re-grab)
-    let box = document.querySelectorAll('.box')
-    box.forEach(addBlackPen)
+    // re-grabs all the divs with class of box (clicking btn will create a new number of divs so need to re-grab new nodeList)
+    // must go last so it has complete nodeList to run through
+    let boxList = document.querySelectorAll('.box')
+    boxList.forEach(addBlackPen)
 })
 
 
 
-///////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // Code for slider & changing grid size
 
 // as slider moves in real time, call function to update the value
@@ -86,7 +97,7 @@ resetBtn.addEventListener('click', () => {
 slider.oninput = updateSliderValue
 
 function updateSliderValue(e) {
-    outputSliderValue.textContent = `${e.target.value} x ${e.target.value}`
+    outputGridSize.textContent = `${e.target.value} x ${e.target.value}`
 }
 
 // btn to change the grid size
@@ -98,7 +109,7 @@ newGridBtn.addEventListener('click', newGrid)
 function newGrid() {
     let currentValue = slider.value
 
-    // changes the grid size based off the current value
+    // changes the css grid columns based off the current value
     container.style.setProperty('grid-template-columns', `repeat(${currentValue}, auto)`)
 
     // removes all the prior boxes so clean slate/no doubling up
@@ -107,7 +118,8 @@ function newGrid() {
     // re draws the grid to add correct number of boxes
     addMultipleBoxes(currentValue)
 
-    // re-grabs all the divs with class of box (clicking is btn will creating a new number of divs so need to re-grab)
-    let box = document.querySelectorAll('.box')
-    box.forEach(addBlackPen)
+    // re-grabs all the divs with class of box (clicking btn will create a new number of divs so need to re-grab new nodeList)
+    // must go last so it has complete nodeList to run through
+    let boxList = document.querySelectorAll('.box')
+    boxList.forEach(addBlackPen)
 }
