@@ -13,6 +13,5 @@
     border: 2px solid red;
     /* Below are part of the CSS Grid styling */
     display: grid;
-    grid-template-columns: repeat(16, auto);
     justify-content: center;
 }

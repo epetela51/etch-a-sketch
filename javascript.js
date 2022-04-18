@@ -1,5 +1,13 @@
-// Code for populating individual boxes & grid
+// div container holding all the child divs
 let container = document.querySelector('#grid-container')
+
+// input slider to change grid size
+let slider = document.querySelector('#sliderRange')
+let outputSliderValue = document.querySelector('#sliderValue')
+
+// display the starting value of the slider on page load for the grid size
+outputSliderValue.textContent = `${slider.value} x ${slider.value}`
+
 
 function box() {
     let square = document.createElement('div')
@@ -7,16 +15,25 @@ function box() {
     container.appendChild(square)
 }
 
+// removes all the boxes so the page is blank
+function removeBoxes() {
+    while(container.firstChild) {
+        container.removeChild(container.firstChild)
+    }
+}
+
 // Sets up the etch-a-sketch grid by adding multiple boxes
-function addMultipleBoxes() {
-    for(let i = 0; i < 256; i++) {
+function addMultipleBoxes(value) {
+    let newValue = value*value
+    
+    for(let i = 0; i < newValue; i++) {
         box()
     }
 }
 
 // on page load, run function to draw the grid
-addMultipleBoxes()
-
+addMultipleBoxes(slider.value)
+container.style.setProperty('grid-template-columns', `repeat(${slider.value}, auto)`)
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -45,23 +62,20 @@ resetBtn.addEventListener('click', () => {
     })
 
     // puts the starting point for the slider back to 16x16
-    slider.value = 16;
-    outputSliderValue.textContent = `${slider.value} x ${slider.value}`
+    let sliderValue = slider.value = 16;
+    outputSliderValue.textContent = `${sliderValue} x ${sliderValue}`
+
+    removeBoxes()
+    addMultipleBoxes(sliderValue)
 
     // resets the grid size back to the default of 16x16
-    container.style.setProperty('grid-template-columns', `repeat(${slider.value}, auto)`)
+    container.style.setProperty('grid-template-columns', `repeat(${sliderValue}, auto)`)
 })
 
 
 
 ///////////////////////////////////////////////////////////////////////////
 // Code for slider & changing grid size
-
-let slider = document.querySelector('#sliderRange')
-let outputSliderValue = document.querySelector('#sliderValue')
-
-// display the starting value of the slider on page load
-outputSliderValue.textContent = `${slider.value} x ${slider.value}`
 
 // as slider moves in real time, call function to update the value
 // 'oninput' allows for real time updates of the value opposed to using 'change' event listener
@@ -79,8 +93,13 @@ newGridBtn.addEventListener('click', newGrid)
 // creates new grid size
 function newGrid() {
     let currentValue = slider.value
-    console.log(currentValue)
 
     // changes the grid size based off the current value
     container.style.setProperty('grid-template-columns', `repeat(${currentValue}, auto)`)
+
+    // removes all the prior boxes so clean slate/no doubling up
+    removeBoxes()
+
+    // re draws the grid to add correct number of boxes
+    addMultipleBoxes(currentValue)
 }
