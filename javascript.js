@@ -18,8 +18,10 @@ outputGridSize.textContent = `${slider.value} x ${slider.value}`
 
 // on page load, run function to draw the grid
 addMultipleBoxes(slider.value)
-// add & set property for css grid columns
-container.style.setProperty('grid-template-columns', `repeat(${slider.value}, auto)`)
+// add & set property for css grid columns & rows
+container.style.setProperty('grid-template-columns', `repeat(${slider.value}, 1fr)`)
+container.style.setProperty('grid-template-rows', `repeat(${slider.value}, 1fr)`)
+
 
 // draws a single box
 function box() {
@@ -75,8 +77,10 @@ resetBtn.addEventListener('click', () => {
     let sliderValue = slider.value = 16;
     outputGridSize.textContent = `${sliderValue} x ${sliderValue}`
 
-    // resets the css grid columns back to the default of 16x16
-    container.style.setProperty('grid-template-columns', `repeat(${sliderValue}, auto)`)
+    // resets the css grid columns & rows back to the default of 16x16
+    container.style.setProperty('grid-template-columns', `repeat(${sliderValue}, 1fr)`)
+    container.style.setProperty('grid-template-rows', `repeat(${sliderValue}, 1fr)`)
+
 
     removeBoxes()
     addMultipleBoxes(sliderValue)
@@ -109,8 +113,9 @@ newGridBtn.addEventListener('click', newGrid)
 function newGrid() {
     let currentValue = slider.value
 
-    // changes the css grid columns based off the current value
-    container.style.setProperty('grid-template-columns', `repeat(${currentValue}, auto)`)
+    // changes the css grid columns & rows based off the current value
+    container.style.setProperty('grid-template-columns', `repeat(${currentValue}, 1fr)`)
+    container.style.setProperty('grid-template-rows', `repeat(${currentValue}, 1fr)`)
 
     // removes all the prior boxes so clean slate/no doubling up
     removeBoxes()

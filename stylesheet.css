@@ -1,7 +1,5 @@
 .box {
     border: 1px solid black;
-    height: 20px;
-    width: 20px;
 }
 
 /* adds the color to the box as mouse moves over it */
@@ -12,5 +10,7 @@
 #grid-container {
     /* Below are part of the CSS Grid styling */
     display: grid;
-    justify-content: center;
+    height: 800px;
+    width: 800px;
+    border: 3px solid red;
 }
