@@ -40,6 +40,7 @@ function addMultipleBoxes(value) {
 }
 
 // removes all the boxes so the page is blank
+// without this function, when resetting the page, the existing number of boxes are just added on to which squishes more boxes together at the bottom
 function removeBoxes() {
     while(container.firstChild) {
         container.removeChild(container.firstChild)
@@ -65,10 +66,10 @@ function addBlackPen(e) {
 listOfBoxes.forEach(addBlackPen)
 
 // reset button
-let resetBtn = document.querySelector('#reset')
+let resetGridSizeBtn = document.querySelector('#resetGridSize')
 
 // clears board on reset button click
-resetBtn.addEventListener('click', () => {
+resetGridSizeBtn.addEventListener('click', () => {
     listOfBoxes.forEach((e) => {
         e.classList.remove('blackPen')
     })
@@ -94,7 +95,7 @@ resetBtn.addEventListener('click', () => {
 
 
 //////////////////////////////////////////////////////////////////////////////
-// Code for slider & changing grid size
+// Code for slider, changing grid size & clearing current sized grid
 
 // as slider moves in real time, call function to update the value
 // 'oninput' allows for real time updates of the value opposed to using 'change' event listener
@@ -104,10 +105,9 @@ function updateSliderValue(e) {
     outputGridSize.textContent = `${e.target.value} x ${e.target.value}`
 }
 
-// btn to change the grid size
-let newGridBtn = document.querySelector('#newGrid')
 
-newGridBtn.addEventListener('click', newGrid)
+// on slider change, run the function
+slider.addEventListener('change', newGrid)
 
 // creates new grid size
 function newGrid() {
@@ -128,3 +128,23 @@ function newGrid() {
     let boxList = document.querySelectorAll('.box')
     boxList.forEach(addBlackPen)
 }
+
+// btn to clean the current sized board
+let cleanBoardBtn = document.querySelector('#cleanBoard')
+
+cleanBoardBtn.addEventListener('click', () => {
+    listOfBoxes.forEach((e) => {
+        e.classList.remove('blackPen')
+    })
+
+    // grabs the current sliders value (aka the current grid size)
+    let sliderValue = slider.value;
+
+    removeBoxes()
+    addMultipleBoxes(sliderValue)
+
+    // re-grabs all the divs with class of box (clicking btn will create a new number of divs so need to re-grab new nodeList)
+    // must go last so it has complete nodeList to run through
+    let boxList = document.querySelectorAll('.box')
+    boxList.forEach(addBlackPen)
+})
