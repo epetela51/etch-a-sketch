@@ -18,23 +18,37 @@
 <body>
 
     <div class="container">
-        <!-- grid -->
 
-        <div id="grid-container" class="mx-auto my-5"></div>
+        <div class="row border border-success">
+            <div class="col text-center mt-3">
+                <h1>Etch-A-Sketch</h1>
+            </div>
 
-        <div>
-            <div id="slider" class="d-grid gap-2 d-md-flex justify-content-md-center mb-5">
-                <input type="range" min="8" max="50" value="16" class="slider" id="sliderRange">
-                <p>Grid Size: <span id="sliderValue"></span></p>
-            </div>
+        </div>
         
-            <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-5">
-                <button id="cleanBoard" class="btn btn-primary btn-lg">Clean Board</button>
-        
-                <button id="resetGridSize" class="btn btn-primary btn-lg">Reset Grid Size</button>
+        <div class="row border border-danger">
+            <div class="col-auto">
+                <div class="gap-4 d-flex my-5">
+                    <button id="cleanBoard" class="btn btn-primary btn-lg">Clean Board</button>
+            
+                    <button id="resetGridSize" class="btn btn-primary btn-lg">Reset Grid Size</button>
+                </div>
+    
+                <div id="slider" class="d-grid gap-2 d-md-flex justify-content-center">
+                    <input type="range" min="8" max="50" value="25" class="slider" id="sliderRange">
+                </div>
+                <div class="text-center py-3">
+                    <p>Grid Size: <span id="sliderValue"></span></p>
+                </div>
             </div>
+
+            <!-- grid -->
+            <div class="col my-5" id="grid-container"></div>
             
         </div>
+        
+        
+        
         
     </div>
 
