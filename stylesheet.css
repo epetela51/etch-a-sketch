@@ -13,3 +13,12 @@
     height: 800px;
     width: 800px;
 }
+
+h1 {
+    font-family: 'Permanent Marker', cursive;
+}
+
+p, button {
+    font-family: 'Caveat', cursive;
+    font-size: 30px;
+}
