@@ -75,7 +75,7 @@ resetGridSizeBtn.addEventListener('click', () => {
     })
 
     // puts the starting point for the slider back to 16x16
-    let sliderValue = slider.value = 25;
+    let sliderValue = slider.value = 38;
     outputGridSize.textContent = `${sliderValue} x ${sliderValue}`
 
     // resets the css grid columns & rows back to the default of 16x16
