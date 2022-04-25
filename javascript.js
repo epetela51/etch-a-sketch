@@ -50,7 +50,7 @@ function removeBoxes() {
 
 
 //////////////////////////////////////////////////////////////////////////////
-// Code for highlighting boxes with mouseover & resetting grid with button click
+// Code for highlighting boxes with mouseover
 
 // buttons to choose between a black pen or rainbow colored pen
 let blackPenBtn = document.querySelector('#blackPen')
@@ -59,21 +59,14 @@ let rainbowPenBtn = document.querySelector('#rainbowPen')
 // grabs all divs with the class of box and creates a nodeList
 let listOfBoxes = document.querySelectorAll('.box')
 
-// function for moving mouse over div and colors box using css class
+// function for adding black background to show a black style pen
 function addBlackPen(e) {
     e.addEventListener('mouseover', () => {
         e.style.backgroundColor = 'black'
     })
 }
 
-
-
-
-
-
-
-
-
+// function to get a random color and show a rainbow style pen
 function getRandomColor(e) {
 
     let letters = '0123456789ABCDEF';
@@ -88,55 +81,24 @@ function getRandomColor(e) {
     })
 }
 
-
+// on rainbow btn click get a random color, highlight the rainbow btn and remove highlight from black btn
 rainbowPenBtn.addEventListener('click', () => {
-    listOfBoxes.forEach(getRandomColor)    
+    listOfBoxes.forEach(getRandomColor)
+    rainbowPenBtn.classList.add('btn-dark')
+    blackPenBtn.classList.remove('btn-dark')    
 })
 
+// on black btn click apply a black background, highlight the black btn and remove highlight from rainbow btn
 blackPenBtn.addEventListener('click', () => {
     listOfBoxes.forEach(addBlackPen)
+    blackPenBtn.classList.add('btn-dark')
+    rainbowPenBtn.classList.remove('btn-dark')
 })
-
-
-
-
-
-
-
-// reset grid size button
-let resetGridSizeBtn = document.querySelector('#resetGridSize')
-
-// clears board on reset button click
-resetGridSizeBtn.addEventListener('click', () => {
-
-    // puts the starting point for the slider back to 16x16
-    let sliderValue = slider.value = 38;
-    outputGridSize.textContent = `${sliderValue} x ${sliderValue}`
-
-    // resets the css grid columns & rows back to the default of 16x16
-    container.style.setProperty('grid-template-columns', `repeat(${sliderValue}, 1fr)`)
-    container.style.setProperty('grid-template-rows', `repeat(${sliderValue}, 1fr)`)
-
-
-    removeBoxes()
-    addMultipleBoxes(sliderValue)
-
-    // re-grabs all the divs with class of box (clicking btn will create a new number of divs so need to re-grab new nodeList)
-    // must go last so it has complete nodeList to run through
-    let boxList = document.querySelectorAll('.box')
-    
-    rainbowPenBtn.addEventListener('click', () => {
-        boxList.forEach(getRandomColor)    
-    })
-    
-    blackPenBtn.addEventListener('click', () => {
-        boxList.forEach(addBlackPen)
-    })})
 
 
 
 //////////////////////////////////////////////////////////////////////////////
-// Code for slider, changing grid size & clearing current sized grid
+// Code for changing grid size on slider change
 
 // as slider moves in real time, call function to update the value
 // 'oninput' allows for real time updates of the value opposed to using 'change' event listener
@@ -145,7 +107,6 @@ slider.oninput = updateSliderValue
 function updateSliderValue(e) {
     outputGridSize.textContent = `${e.target.value} x ${e.target.value}`
 }
-
 
 // on slider change, run the function
 slider.addEventListener('change', newGrid)
@@ -164,6 +125,10 @@ function newGrid() {
     // re draws the grid to add correct number of boxes
     addMultipleBoxes(currentValue)
 
+    // removes the highlight for the selected pen btn
+    blackPenBtn.classList.remove('btn-dark')    
+    rainbowPenBtn.classList.remove('btn-dark')
+
     // re-grabs all the divs with class of box (clicking btn will create a new number of divs so need to re-grab new nodeList)
     // must go last so it has complete nodeList to run through
     let boxList = document.querySelectorAll('.box')
@@ -176,6 +141,11 @@ function newGrid() {
         boxList.forEach(addBlackPen)
     })
 }
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+// Code for clearing the grid and resetting grid size back to starting point
 
 // btn to clean the current sized board
 let cleanBoardBtn = document.querySelector('#cleanBoard')
@@ -199,3 +169,38 @@ cleanBoardBtn.addEventListener('click', () => {
         boxList.forEach(addBlackPen)
     })
 })
+
+// reset grid size button
+let resetGridSizeBtn = document.querySelector('#resetGridSize')
+
+// clears board on reset button click
+resetGridSizeBtn.addEventListener('click', () => {
+
+    // puts the starting point for the slider back to 16x16
+    let sliderValue = slider.value = 38;
+    outputGridSize.textContent = `${sliderValue} x ${sliderValue}`
+
+    // resets the css grid columns & rows back to the default of 16x16
+    container.style.setProperty('grid-template-columns', `repeat(${sliderValue}, 1fr)`)
+    container.style.setProperty('grid-template-rows', `repeat(${sliderValue}, 1fr)`)
+
+
+    removeBoxes()
+    addMultipleBoxes(sliderValue)
+
+    // removes the highlight for the selected pen btn
+    blackPenBtn.classList.remove('btn-dark')    
+    rainbowPenBtn.classList.remove('btn-dark')    
+
+    // re-grabs all the divs with class of box (clicking btn will create a new number of divs so need to re-grab new nodeList)
+    // must go last so it has complete nodeList to run through
+    let boxList = document.querySelectorAll('.box')
+    
+    rainbowPenBtn.addEventListener('click', () => {
+        boxList.forEach(getRandomColor)    
+    })
+    
+    blackPenBtn.addEventListener('click', () => {
+        boxList.forEach(addBlackPen)
+
+})})
