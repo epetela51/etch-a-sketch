@@ -182,15 +182,14 @@ let cleanBoardBtn = document.querySelector('#cleanBoard')
 
 cleanBoardBtn.addEventListener('click', () => {
 
-    // grabs the current sliders value (aka the current grid size)
-    let sliderValue = slider.value;
-
-    removeBoxes()
-    addMultipleBoxes(sliderValue)
-
     // re-grabs all the divs with class of box (clicking btn will create a new number of divs so need to re-grab new nodeList)
     // must go last so it has complete nodeList to run through
     let boxList = document.querySelectorAll('.box')
+
+    // loops through and changes the background color to blank/nothing
+    boxList.forEach((e) => {
+        e.style.backgroundColor = '';
+    })
 
     rainbowPenBtn.addEventListener('click', () => {
         boxList.forEach(getRandomColor)    
