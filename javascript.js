@@ -66,17 +66,12 @@ function addBlackPen(e) {
     })
 }
 
-// loops through each item in nodelist and adds function to 'draw' a black pen on mouseover
-// listOfBoxes.forEach(addBlackPen)
 
 
 
 
 
 
-
-
-// listOfBoxes.forEach(getRandomColor)
 
 
 function getRandomColor(e) {
@@ -108,14 +103,11 @@ blackPenBtn.addEventListener('click', () => {
 
 
 
-// reset button
+// reset grid size button
 let resetGridSizeBtn = document.querySelector('#resetGridSize')
 
 // clears board on reset button click
 resetGridSizeBtn.addEventListener('click', () => {
-    listOfBoxes.forEach((e) => {
-        e.classList.remove('blackPen')
-    })
 
     // puts the starting point for the slider back to 16x16
     let sliderValue = slider.value = 38;
@@ -132,8 +124,14 @@ resetGridSizeBtn.addEventListener('click', () => {
     // re-grabs all the divs with class of box (clicking btn will create a new number of divs so need to re-grab new nodeList)
     // must go last so it has complete nodeList to run through
     let boxList = document.querySelectorAll('.box')
-    boxList.forEach(addBlackPen)
-})
+    
+    rainbowPenBtn.addEventListener('click', () => {
+        boxList.forEach(getRandomColor)    
+    })
+    
+    blackPenBtn.addEventListener('click', () => {
+        boxList.forEach(addBlackPen)
+    })})
 
 
 
@@ -169,16 +167,20 @@ function newGrid() {
     // re-grabs all the divs with class of box (clicking btn will create a new number of divs so need to re-grab new nodeList)
     // must go last so it has complete nodeList to run through
     let boxList = document.querySelectorAll('.box')
-    boxList.forEach(addBlackPen)
+    
+    rainbowPenBtn.addEventListener('click', () => {
+        boxList.forEach(getRandomColor)    
+    })
+    
+    blackPenBtn.addEventListener('click', () => {
+        boxList.forEach(addBlackPen)
+    })
 }
 
 // btn to clean the current sized board
 let cleanBoardBtn = document.querySelector('#cleanBoard')
 
 cleanBoardBtn.addEventListener('click', () => {
-    listOfBoxes.forEach((e) => {
-        e.classList.remove('blackPen')
-    })
 
     // grabs the current sliders value (aka the current grid size)
     let sliderValue = slider.value;
@@ -189,14 +191,12 @@ cleanBoardBtn.addEventListener('click', () => {
     // re-grabs all the divs with class of box (clicking btn will create a new number of divs so need to re-grab new nodeList)
     // must go last so it has complete nodeList to run through
     let boxList = document.querySelectorAll('.box')
-    boxList.forEach(addBlackPen)
+
+    rainbowPenBtn.addEventListener('click', () => {
+        boxList.forEach(getRandomColor)    
+    })
+    
+    blackPenBtn.addEventListener('click', () => {
+        boxList.forEach(addBlackPen)
+    })
 })
-
-
-
-
-
-
-// let randomColor = Math.floor(Math.random()*16777215).toString(16)
-
-// console.log(randomColor)
