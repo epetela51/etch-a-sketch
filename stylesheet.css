@@ -2,10 +2,10 @@
     border: 1px solid black;
 }
 
-/* adds the color to the box as mouse moves over it */
+/* adds the color to the box as mouse moves over it
 .blackPen {
     background-color: black;
-}
+} */
 
 #grid-container {
     /* Below are part of the CSS Grid styling */

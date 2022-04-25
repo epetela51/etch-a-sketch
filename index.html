@@ -36,17 +36,27 @@
 
             <div class="row">
                 <div class="col-auto mx-3">
+
+                    <!-- Clearn Board / Reset Grid Btns -->
                     <div class="gap-4 d-flex my-5">
                         <button id="cleanBoard" class="btn btn-primary btn-lg">Clean Board</button>
                 
                         <button id="resetGridSize" class="btn btn-primary btn-lg">Reset Grid Size</button>
                     </div>
         
+                    <!-- Slider -->
                     <div id="slider" class="d-grid gap-2 d-md-flex justify-content-center">
                         <input type="range" min="8" max="64" value="38" class="form-range" id="sliderRange">
                     </div>
                     <div class="text-center py-3 text-white">
                         <p>Grid Size: <span id="sliderValue"></span></p>
+                    </div>
+
+                    <!-- Black & Rainbow Buttons -->
+                    <div class="gap-4 d-flex my-5">
+                        <button id="blackPen" class="btn btn-primary btn-lg">Black</button>
+
+                        <button id="rainbowPen" class="btn btn-primary btn-lg">Rainbow</button>
                     </div>
                 </div>
     

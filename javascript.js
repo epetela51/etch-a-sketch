@@ -52,18 +52,61 @@ function removeBoxes() {
 //////////////////////////////////////////////////////////////////////////////
 // Code for highlighting boxes with mouseover & resetting grid with button click
 
+// buttons to choose between a black pen or rainbow colored pen
+let blackPenBtn = document.querySelector('#blackPen')
+let rainbowPenBtn = document.querySelector('#rainbowPen')
+
 // grabs all divs with the class of box and creates a nodeList
 let listOfBoxes = document.querySelectorAll('.box')
 
 // function for moving mouse over div and colors box using css class
 function addBlackPen(e) {
     e.addEventListener('mouseover', () => {
-        e.classList.add('blackPen')
+        e.style.backgroundColor = 'black'
     })
 }
 
 // loops through each item in nodelist and adds function to 'draw' a black pen on mouseover
-listOfBoxes.forEach(addBlackPen)
+// listOfBoxes.forEach(addBlackPen)
+
+
+
+
+
+
+
+
+// listOfBoxes.forEach(getRandomColor)
+
+
+function getRandomColor(e) {
+
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+
+    e.addEventListener('mouseover', () => {
+        e.style.backgroundColor = `${color}`
+    })
+}
+
+
+rainbowPenBtn.addEventListener('click', () => {
+    listOfBoxes.forEach(getRandomColor)    
+})
+
+blackPenBtn.addEventListener('click', () => {
+    listOfBoxes.forEach(addBlackPen)
+})
+
+
+
+
+
+
 
 // reset button
 let resetGridSizeBtn = document.querySelector('#resetGridSize')
@@ -148,3 +191,12 @@ cleanBoardBtn.addEventListener('click', () => {
     let boxList = document.querySelectorAll('.box')
     boxList.forEach(addBlackPen)
 })
+
+
+
+
+
+
+// let randomColor = Math.floor(Math.random()*16777215).toString(16)
+
+// console.log(randomColor)
