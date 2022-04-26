@@ -52,9 +52,9 @@ function removeBoxes() {
 //////////////////////////////////////////////////////////////////////////////
 // Code for highlighting boxes with mouseover
 
-// buttons to choose between a black pen or rainbow colored pen
+// buttons to choose between a black pen or random colored pen
 let blackPenBtn = document.querySelector('#blackPen')
-let rainbowPenBtn = document.querySelector('#rainbowPen')
+let randomPenBtn = document.querySelector('#randomPen')
 
 // grabs all divs with the class of box and creates a nodeList
 let listOfBoxes = document.querySelectorAll('.box')
@@ -66,7 +66,7 @@ function addBlackPen(e) {
     })
 }
 
-// function to get a random color and show a rainbow style pen
+// function to get a random color and show a random style pen
 function getRandomColor(e) {
 
     let letters = '0123456789ABCDEF';
@@ -81,18 +81,20 @@ function getRandomColor(e) {
     })
 }
 
-// on rainbow btn click get a random color, highlight the rainbow btn and remove highlight from black btn
-rainbowPenBtn.addEventListener('click', () => {
+// on random btn click get a random color, highlight the random btn and remove highlight from black btn
+randomPenBtn.addEventListener('click', () => {
     listOfBoxes.forEach(getRandomColor)
-    rainbowPenBtn.classList.add('btn-dark')
-    blackPenBtn.classList.remove('btn-dark')    
+    randomPenBtn.classList.add('btn-dark')
+    blackPenBtn.classList.remove('btn-dark')
+    selectColorBtn.classList.remove('btn-dark')    
 })
 
-// on black btn click apply a black background, highlight the black btn and remove highlight from rainbow btn
+// on black btn click apply a black background, highlight the black btn and remove highlight from random btn
 blackPenBtn.addEventListener('click', () => {
     listOfBoxes.forEach(addBlackPen)
     blackPenBtn.classList.add('btn-dark')
-    rainbowPenBtn.classList.remove('btn-dark')
+    randomPenBtn.classList.remove('btn-dark')
+    selectColorBtn.classList.remove('btn-dark')    
 })
 
 // color picker input
@@ -109,6 +111,23 @@ function addPickedColor(e) {
 pickPenColor.addEventListener('change', () => {
 
     // grab all the boxes for the current grid layout
+    let boxList = document.querySelectorAll('.box')
+
+    boxList.forEach(addPickedColor)
+})
+
+// btn to select a pen color
+let selectColorBtn = document.querySelector('#selectColorBtn')
+
+// clicking the 'select a pen color' btn shows the color picker and applies color selected from picker on mouse over
+selectColorBtn.addEventListener('click', () => {
+    pickPenColor.removeAttribute('hidden')
+
+    selectColorBtn.classList.add('btn-dark')
+    randomPenBtn.classList.remove('btn-dark')
+    blackPenBtn.classList.remove('btn-dark')
+
+    // grab divs & loop through again otherwise once this btn is clicked it will keep using the last pen chosen (i.e. either black or random will still be used)
     let boxList = document.querySelectorAll('.box')
 
     boxList.forEach(addPickedColor)
@@ -146,13 +165,16 @@ function newGrid() {
 
     // removes the highlight for the selected pen btn
     blackPenBtn.classList.remove('btn-dark')    
-    rainbowPenBtn.classList.remove('btn-dark')
+    randomPenBtn.classList.remove('btn-dark')
+    selectColorBtn.classList.remove('btn-dark')
+    // put the hidden attribute back to hide the picker
+    pickPenColor.setAttribute('hidden', 'true') 
 
     // re-grabs all the divs with class of box (clicking btn will create a new number of divs so need to re-grab new nodeList)
     // must go last so it has complete nodeList to run through
     let boxList = document.querySelectorAll('.box')
     
-    rainbowPenBtn.addEventListener('click', () => {
+    randomPenBtn.addEventListener('click', () => {
         boxList.forEach(getRandomColor)    
     })
     
@@ -180,7 +202,7 @@ cleanBoardBtn.addEventListener('click', () => {
         e.style.backgroundColor = '';
     })
 
-    rainbowPenBtn.addEventListener('click', () => {
+    randomPenBtn.addEventListener('click', () => {
         boxList.forEach(getRandomColor)    
     })
     
@@ -209,13 +231,16 @@ resetGridSizeBtn.addEventListener('click', () => {
 
     // removes the highlight for the selected pen btn
     blackPenBtn.classList.remove('btn-dark')    
-    rainbowPenBtn.classList.remove('btn-dark')    
+    randomPenBtn.classList.remove('btn-dark')
+    selectColorBtn.classList.remove('btn-dark')
+    // put the hidden attribute back to hide the picker
+    pickPenColor.setAttribute('hidden', 'true')        
 
     // re-grabs all the divs with class of box (clicking btn will create a new number of divs so need to re-grab new nodeList)
     // must go last so it has complete nodeList to run through
     let boxList = document.querySelectorAll('.box')
     
-    rainbowPenBtn.addEventListener('click', () => {
+    randomPenBtn.addEventListener('click', () => {
         boxList.forEach(getRandomColor)    
     })
     
