@@ -22,3 +22,19 @@ p, button {
     font-family: 'Caveat', cursive;
     font-size: 30px;
 }
+
+/* horizontal line */
+hr {
+    color: white;
+    border: 1px solid white;
+    opacity: 100;
+    border-radius: 5px;
+}
+
+/* color picker */
+#pickPenColor {
+    width: 75px;
+    height: 75px;
+    padding: 0;
+    border-color:#dc3545;
+}

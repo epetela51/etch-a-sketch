@@ -86,7 +86,10 @@ randomPenBtn.addEventListener('click', () => {
     listOfBoxes.forEach(getRandomColor)
     randomPenBtn.classList.add('btn-dark')
     blackPenBtn.classList.remove('btn-dark')
-    selectColorBtn.classList.remove('btn-dark')    
+    selectColorBtn.classList.remove('btn-dark') 
+    
+    // put the hidden attribute back to hide the picker
+    pickPenColor.setAttribute('hidden', 'true') 
 })
 
 // on black btn click apply a black background, highlight the black btn and remove highlight from random btn
@@ -94,7 +97,10 @@ blackPenBtn.addEventListener('click', () => {
     listOfBoxes.forEach(addBlackPen)
     blackPenBtn.classList.add('btn-dark')
     randomPenBtn.classList.remove('btn-dark')
-    selectColorBtn.classList.remove('btn-dark')    
+    selectColorBtn.classList.remove('btn-dark') 
+    
+    // put the hidden attribute back to hide the picker
+    pickPenColor.setAttribute('hidden', 'true') 
 })
 
 // color picker input
