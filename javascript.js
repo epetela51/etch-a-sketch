@@ -27,6 +27,8 @@ container.style.setProperty('grid-template-rows', `repeat(${slider.value}, 1fr)`
 function box() {
     let square = document.createElement('div')
     square.setAttribute('class', 'box')
+    // add an id of square to be used later to toggle grid lines on/off
+    square.setAttribute('id', 'square')
     container.appendChild(square)
 }
 
@@ -155,7 +157,7 @@ function updateSliderValue(e) {
 // on slider change, run the function
 slider.addEventListener('change', newGrid)
 
-// creates new grid size
+// creates a new grid size based off the slider value/change
 function newGrid() {
     let currentValue = slider.value
 
@@ -176,6 +178,9 @@ function newGrid() {
     // put the hidden attribute back to hide the picker
     pickPenColor.setAttribute('hidden', 'true') 
 
+    // reset the grid lines toggle back to checked
+    gridToggleSwitch.checked = true
+
     // re-grabs all the divs with class of box (clicking btn will create a new number of divs so need to re-grab new nodeList)
     // must go last so it has complete nodeList to run through
     let boxList = document.querySelectorAll('.box')
@@ -192,7 +197,7 @@ function newGrid() {
 
 
 //////////////////////////////////////////////////////////////////////////////
-// Code for clearing the grid and resetting grid size back to starting point
+// Code for clearing the grid, resetting grid size back to page load size and toggle to add/remove grid lines
 
 // btn to clean the current sized board
 let cleanBoardBtn = document.querySelector('#cleanBoard')
@@ -220,7 +225,7 @@ cleanBoardBtn.addEventListener('click', () => {
 // reset grid size button
 let resetGridSizeBtn = document.querySelector('#resetGridSize')
 
-// clears board on reset button click
+// resets the grid size back to what it was on page load and clears board
 resetGridSizeBtn.addEventListener('click', () => {
 
     // puts the starting point for the slider back to 16x16
@@ -240,7 +245,10 @@ resetGridSizeBtn.addEventListener('click', () => {
     randomPenBtn.classList.remove('btn-dark')
     selectColorBtn.classList.remove('btn-dark')
     // put the hidden attribute back to hide the picker
-    pickPenColor.setAttribute('hidden', 'true')        
+    pickPenColor.setAttribute('hidden', 'true')  
+    
+    // reset the grid lines toggle back to checked
+    gridToggleSwitch.checked = true
 
     // re-grabs all the divs with class of box (clicking btn will create a new number of divs so need to re-grab new nodeList)
     // must go last so it has complete nodeList to run through
@@ -254,3 +262,28 @@ resetGridSizeBtn.addEventListener('click', () => {
         boxList.forEach(addBlackPen)
 
 })})
+
+// toggle switch 
+let gridToggleSwitch = document.querySelector("#gridToggle")
+
+gridToggleSwitch.addEventListener('change', () => {
+
+    // holds where the toggle is true or false based on if it's toggled
+    let toggleChoice = gridToggleSwitch.checked
+
+    // grabs all the id's of square
+    let squareList = document.querySelectorAll('#square')
+
+    // if toggle is true then add the border color back to black to show
+    if(toggleChoice == true) {
+        squareList.forEach((e) => {
+            e.style.border = '1px solid black'
+        })
+    // if the toggle is false make the border 0 so it doesn't show
+    } else if (toggleChoice == false) {
+        squareList.forEach((e) => {
+            e.style.border = '0'
+        })
+    }
+
+})
