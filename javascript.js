@@ -95,6 +95,25 @@ blackPenBtn.addEventListener('click', () => {
     rainbowPenBtn.classList.remove('btn-dark')
 })
 
+// color picker input
+let pickPenColor = document.querySelector('#pickPenColor')
+
+// on the mouseover add the background color from the color picker
+function addPickedColor(e) {
+    e.addEventListener('mouseover', () => {
+        e.style.backgroundColor = `${pickPenColor.value}`
+    })
+}
+
+// once the color picker changes/a color is chosen then grab all the divs and loop through each box and apply the chosen color
+pickPenColor.addEventListener('change', () => {
+
+    // grab all the boxes for the current grid layout
+    let boxList = document.querySelectorAll('.box')
+
+    boxList.forEach(addPickedColor)
+})
+
 
 
 //////////////////////////////////////////////////////////////////////////////
